@@ -1,3 +1,5 @@
+
+<img style="height:40%; display: block; margin-left: auto; margin-right: auto; width: 50%;" src="https://arturcastiel.github.io/assets/img/iconeartur.svg" alt="This is me!">
 <h1 align="center">Hi 👋, I'm Dr. Artur Castiel Reis de Souza</h1>
 <h3 align="center">a mechanical engineer passionate about computational fluid dynamics and the development of subsurface porous media reservoirs. I am currently a reseacher at TU-Delft working with conservative formulations to simulate multi-phase flow in porous media. In specific, I am interested on linear and non-linear non-orthodox flux approximations and techniques to generalize the Multiscale Finite Volume family of methods to work with unstructured grids.</h3>
 
