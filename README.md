@@ -1,6 +1,5 @@
-
 <div style="width: 100%; text-align: center;">
-<img style="height:40%; display: block; margin-left: auto; margin-right: auto; width: 50%;" src="https://arturcastiel.github.io/assets/img/iconeartur.svg" alt="This is me!">
+<img style="height:40%; display: inline-block; margin: 0 auto; padding: 3px;" src="https://arturcastiel.github.io/assets/img/iconeartur.svg" alt="This is me!">
 </div>
 
 <h1 align="center">Hi 👋, I'm Dr. Artur Castiel Reis de Souza</h1>
