@@ -3,9 +3,9 @@
 </div>
 
 <h1 align="center">Hi 👋, I'm Dr. Artur Castiel Reis de Souza</h1>
-<h3 align="center">a mechanical engineer passionate about computational fluid dynamics and the development of subsurface porous media reservoirs. I am currently a reseacher at TU-Delft working with conservative formulations to simulate multi-phase flow in porous media. In specific, I am interested on linear and non-linear non-orthodox flux approximations and techniques to generalize the Multiscale Finite Volume family of methods to work with unstructured grids.</h3>
+<h3 align="center">a mechanical engineer passionate about computational fluid dynamics and the development of subsurface porous media reservoirs. I am currently a Reservoir Simulation Scientist at TNO..</h3>
 
-- 🔭 I’m currently working on developing **a general purpose multiscale simulator for fracture media using unstructrured grids.**
+<!-- - 🔭 I’m currently working on developing **a general purpose multiscale simulator for fracture media using unstructrured grids.** -->
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
