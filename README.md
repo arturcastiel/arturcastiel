@@ -1,5 +1,6 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/arturcastiel/arturcastiel.github.io/master/assets/img/iconeartur.svg" alt="Artur Castiel" width="150" />
+  <img src="https://raw.githubusercontent.com/arturcastiel/arturcastiel.github.io/master/assets/iconeartur-BbXazwrK.svg" alt="Artur Castiel" width="250" />
+
   
   # Artur Castiel, PhD
   
