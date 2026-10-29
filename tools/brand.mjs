@@ -217,6 +217,7 @@ const og = ogImage();
 write('og-image.svg', og);
 write('og-image.jpg', jpg(og, 1200, 88));
 // LinkedIn accepts up to 8 MB; the banner is not a link preview, so it gets a higher quality.
+// Rendered at 2× (3168 × 792) so it stays sharp on high-DPI screens after LinkedIn's own recompression.
 const banner = linkedinBanner();
 write('linkedin-banner.svg', banner);
-write('linkedin-banner.jpg', jpg(banner, 1584, 94, 8 * 1024 * 1024));
+write('linkedin-banner.jpg', jpg(banner, 1584 * 2, 95, 8 * 1024 * 1024));
