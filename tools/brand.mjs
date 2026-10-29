@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Resvg } from '@resvg/resvg-js';
+import jpeg from 'jpeg-js';
 import { THEMES, text, textPath, svg, buildMesh, portrait } from './build.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -111,6 +112,15 @@ ${textPath(keys, t.muted)}`;
 
 const png = (svgText, width, background) => new Resvg(svgText, { fitTo: { mode: 'width', value: width }, background }).render().asPng();
 
+// WhatsApp drops link-preview images above ~300 kB, and a PNG with a photo is larger than that.
+const OG_MAX_BYTES = 280 * 1024;
+function jpg(svgText, width, quality) {
+  const img = new Resvg(svgText, { fitTo: { mode: 'width', value: width }, background: t.card }).render();
+  const { data } = jpeg.encode({ data: img.pixels, width: img.width, height: img.height }, quality);
+  if (data.length > OG_MAX_BYTES) throw new Error(`og-image.jpg is ${Math.round(data.length / 1024)} kB; WhatsApp needs < 300 kB`);
+  return data;
+}
+
 // ICO with embedded PNG images (supported by every current browser).
 function ico(images) {
   const header = Buffer.alloc(6 + 16 * images.length);
@@ -149,4 +159,4 @@ const touch = doc(180, 180, label, `<rect width="180" height="180" fill="${t.car
 write('apple-touch-icon.png', png(touch, 180));
 const og = ogImage();
 write('og-image.svg', og);
-write('og-image.png', png(og, 1200));
+write('og-image.jpg', jpg(og, 1200, 88));
