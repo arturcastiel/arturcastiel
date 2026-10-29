@@ -108,16 +108,72 @@ ${textPath(keys, t.muted)}`;
   return doc(W, H, 'Artur Castiel, PhD. Reservoir Simulation Scientist at TNO, Utrecht. Numerical methods and open-source simulators for flow in porous media.', body);
 }
 
+/* --------------------------------------------------------- LinkedIn banner */
+
+// 1584 × 396 (4:1). LinkedIn puts the profile photo over the bottom-left of the banner, so the
+// mesh is refined towards where the photo sits (the photo becomes the "well") and the text stays
+// on the right, clear of the photo on both desktop and the mobile app.
+function linkedinBanner() {
+  const W = 1584;
+  const H = 396;
+  const X = 620;
+  const well = { x: 200, y: 330, r: 140 };
+
+  // The photo sits at slightly different spots on desktop and mobile, so the well has no hard edge:
+  // its centre fades softly into the paper instead.
+  const mesh = buildMesh({ width: W, height: H, cx: well.x, cy: well.y, rw: well.r, h0: 8, growth: 1.15, rmax: 1500, seed: 11, shade: [0.01, 0.15] });
+
+  const eyebrowA = text('Reservoir Simulation Scientist', { family: 'monoMedium', size: 19, ls: 0.08, upper: true, x: X, y: 104 });
+  const sepX = X + eyebrowA.width + 14;
+  const eyebrowB = text('TNO · Utrecht', { family: 'monoMedium', size: 19, ls: 0.08, upper: true, x: sepX + 30, y: 104 });
+  const lede1 = text('Numerical methods and open\u2011source simulators', { family: 'serif', size: 41, wght: 350, opsz: 30, ls: -0.01, x: X - 2, y: 176 });
+  const lede2 = text('for flow in porous media.', { family: 'serif', size: 41, wght: 350, opsz: 30, ls: -0.01, x: X - 2, y: 228 });
+  const keys = text('Multiscale FV  ·  Unstructured grids  ·  OPM Flow  ·  CCS · H\u2082 · Geothermal', { family: 'mono', size: 16, ls: 0.06, upper: true, x: X + 50, y: 300 });
+  const url = text('arturcastiel.github.io', { family: 'monoMedium', size: 18, ls: 0.02, x: X + 40, y: 352 });
+
+  const textRight = Math.max(lede1.x0 + lede1.width, keys.x0 + keys.width, eyebrowB.x0 + eyebrowB.width);
+  if (textRight > W - 60) throw new Error(`linkedin-banner: text (${Math.round(textRight)}) runs off the right edge`);
+
+  const body = `<defs>
+  <radialGradient id="rg" gradientUnits="userSpaceOnUse" cx="${well.x}" cy="${well.y}" r="1150">
+    <stop offset=".3" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="lg" gradientUnits="userSpaceOnUse" x1="${X - 180}" x2="${X + 60}" y1="0" y2="0">
+    <stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity=".18"/>
+  </linearGradient>
+  <mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}">
+    <rect width="${W}" height="${H}" fill="url(#rg)"/>
+  </mask>
+  <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="${well.x}" cy="${well.y}" r="${well.r + 30}">
+    <stop offset=".72" stop-color="${t.card}"/><stop offset="1" stop-color="${t.card}" stop-opacity="0"/>
+  </radialGradient>
+  <mask id="calm" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}">
+    <rect width="${W}" height="${H}" fill="url(#lg)"/>
+  </mask>
+</defs>
+<rect width="${W}" height="${H}" fill="${t.card}"/>
+<g mask="url(#calm)"><g mask="url(#fade)">${meshPaths(mesh, { cellColor: t.mesh, edgeColor: t.mesh, edgeOpacity: 0.36, edgeWidth: 1.1, boost: 1 })}</g></g>
+<circle cx="${well.x}" cy="${well.y}" r="${well.r + 30}" fill="url(#glow)"/>
+${textPath(eyebrowA, t.accent)}<rect x="${sepX}" y="97" width="16" height="1.5" fill="${t.lineStrong}"/>${textPath(eyebrowB, t.accent)}
+${textPath(lede1, t.ink)}${textPath(lede2, t.ink)}
+<rect x="${X}" y="294" width="36" height="2" fill="${t.accent}"/>
+${textPath(keys, t.muted)}
+<g transform="translate(${X} 326) scale(${32 / 512})">${logo('small', 'li-logo')}</g>
+${textPath(url, t.text)}`;
+
+  return doc(W, H, 'Artur Castiel, PhD. Reservoir Simulation Scientist at TNO, Utrecht. Numerical methods and open-source simulators for flow in porous media.', body);
+}
+
 /* ------------------------------------------------------------------- output */
 
 const png = (svgText, width, background) => new Resvg(svgText, { fitTo: { mode: 'width', value: width }, background }).render().asPng();
 
 // WhatsApp drops link-preview images above ~300 kB, and a PNG with a photo is larger than that.
 const OG_MAX_BYTES = 280 * 1024;
-function jpg(svgText, width, quality) {
+function jpg(svgText, width, quality, maxBytes = OG_MAX_BYTES) {
   const img = new Resvg(svgText, { fitTo: { mode: 'width', value: width }, background: t.card }).render();
   const { data } = jpeg.encode({ data: img.pixels, width: img.width, height: img.height }, quality);
-  if (data.length > OG_MAX_BYTES) throw new Error(`og-image.jpg is ${Math.round(data.length / 1024)} kB; WhatsApp needs < 300 kB`);
+  if (data.length > maxBytes) throw new Error(`JPEG is ${Math.round(data.length / 1024)} kB, limit ${Math.round(maxBytes / 1024)} kB`);
   return data;
 }
 
@@ -160,3 +216,7 @@ write('apple-touch-icon.png', png(touch, 180));
 const og = ogImage();
 write('og-image.svg', og);
 write('og-image.jpg', jpg(og, 1200, 88));
+// LinkedIn accepts up to 8 MB; the banner is not a link preview, so it gets a higher quality.
+const banner = linkedinBanner();
+write('linkedin-banner.svg', banner);
+write('linkedin-banner.jpg', jpg(banner, 1584, 94, 8 * 1024 * 1024));

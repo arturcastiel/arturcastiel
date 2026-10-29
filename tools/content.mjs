@@ -83,9 +83,9 @@ export const STACK = [
 export const EDUCATION = [
   { program: 'Postdoctoral Studies', institution: 'Delft University of Technology', period: '2022 – 2024', flag: 'nl' },
   { program: 'Visiting PhD Student', institution: 'Swansea University', period: '2020 – 2021', flag: 'gb' },
-  { program: 'PhD in Civil Engineering', institution: 'Federal University of Pernambuco', period: '2018 – 2022', flag: 'br', gpa: '4.0 / 4.0' },
-  { program: 'MSc in Civil Engineering', institution: 'Federal University of Pernambuco', period: '2015 – 2017', flag: 'br', gpa: '3.9 / 4.0' },
-  { program: 'BSc in Mechanical Engineering', institution: 'University of Pernambuco', period: '2006 – 2012', flag: 'br' },
+  { program: 'PhD in Civil Engineering', institution: 'Federal University of Pernambuco', period: '2019 – 2022', flag: 'br', gpa: '4.0 / 4.0' },
+  { program: 'MSc in Civil Engineering', institution: 'Federal University of Pernambuco', period: '2015 – 2019', flag: 'br', gpa: '3.9 / 4.0' },
+  { program: 'BSc in Mechanical Engineering', institution: 'University of Pernambuco', period: '2006 – 2011', flag: 'br' },
 ];
 
 export const AWARDS = [
