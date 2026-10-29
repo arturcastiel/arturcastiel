@@ -4,10 +4,10 @@
   
   # Artur Castiel, PhD
   
-  **Reservoir Simulation Scientist** · [TNO](https://www.tno.nl/) · Soest, Netherlands
+  **Reservoir Simulation Scientist** · [TNO](https://www.tno.nl/) · Utrecht, Netherlands
   
-  [![Website](https://img.shields.io/badge/Website-arturcastiel.github.io-1B4965?style=flat-square&logo=google-chrome&logoColor=white)](https://arturcastiel.github.io)
-  [![Google Scholar](https://img.shields.io/badge/Google%20Scholar-63%20citations-4285F4?style=flat-square&logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=dRY2EE8AAAAJ)
+  [![Website](https://img.shields.io/badge/Website-arturcastiel.github.io-0F6F74?style=flat-square&logo=google-chrome&logoColor=white)](https://arturcastiel.github.io)
+  [![Google Scholar](https://img.shields.io/badge/Google%20Scholar-76%20citations-4285F4?style=flat-square&logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=dRY2EE8AAAAJ)
   [![ORCID](https://img.shields.io/badge/ORCID-0000--0003--0722--7024-A6CE39?style=flat-square&logo=orcid&logoColor=white)](https://orcid.org/0000-0003-0722-7024)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-arturcastiel-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/arturcastiel/)
   [![ResearchGate](https://img.shields.io/badge/ResearchGate-Artur--Castiel-00CCBB?style=flat-square&logo=researchgate&logoColor=white)](https://www.researchgate.net/profile/Artur-Castiel)
@@ -17,7 +17,7 @@
 
 I am a researcher passionate about computational fluid dynamics and the development of simulators for **hydrogen storage**, **carbon capture & storage**, **enhanced geothermal systems**, and subsurface porous media applications. My work focuses on non-orthodox flux approximations and generalizing **Multiscale Finite Volume methods** for unstructured grids.
 
-I am an active contributor to the [Open Porous Media (OPM)](https://opm-project.org/) initiative, where I have been working on adding support for **Local Grid Refinement (LGR)**.
+I am an active contributor to the [Open Porous Media (OPM)](https://opm-project.org/) initiative, where I develop **Local Grid Refinement (LGR)**, compositional flash and dual-porosity capabilities in OPM Flow (70+ merged pull requests, credited author of [OPM Flow 2026.04](https://doi.org/10.5281/zenodo.20504835)).
 
 ---
 
@@ -51,7 +51,7 @@ I am an active contributor to the [Open Porous Media (OPM)](https://opm-project.
     <td width="50%" valign="top">
       <h4>🔬 <a href="https://opm-project.org/">Open Porous Media (OPM)</a></h4>
       <em>Contributor · C++, CMake, MPI</em><br/><br/>
-      Community-driven open-source reservoir simulator for industrial-grade porous media simulation. Contributing to core modules (opm-common, opm-simulators) with focus on Local Grid Refinement (LGR) support.
+      Community-driven open-source reservoir simulator for industrial-grade porous media simulation. Contributing to core modules (opm-common, opm-grid, opm-simulators): Local Grid Refinement (LGR), compositional flash and dual-porosity models.
     </td>
     <td width="50%" valign="top">
       <h4>⚡ <a href="https://gitlab.com/darsim/src">DARSim</a></h4>
@@ -69,7 +69,8 @@ I am an active contributor to the [Open Porous Media (OPM)](https://opm-project.
       <h4>📊 Metrics</h4>
       <br/>
       <strong>8</strong> Journal Papers<br/>
-      <strong>63</strong> Citations<br/>
+      <strong>76</strong> Citations<br/>
+      <strong>5</strong> h-index<br/>
       <strong>20</strong> Total Publications<br/>
       <strong>2</strong> Thesis Awards
     </td>
