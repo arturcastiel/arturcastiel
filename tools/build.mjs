@@ -794,27 +794,34 @@ ${order.map((id) => `${head(id)}\n${blocks[id]}`).join('\n\n')}
 
 /* -------------------------------------------------------------------- build */
 
-fs.mkdirSync(OUT, { recursive: true });
-for (const f of fs.readdirSync(OUT)) if (f.endsWith('.svg')) fs.unlinkSync(path.join(OUT, f));
+// Shared with brand.mjs (logo, favicon and link-preview image of the website).
+export { THEMES, text, textPath, svg, buildMesh, meshMarkup, portrait, UP, DRAW, delay };
 
-const projectH = Math.ceil(Math.max(...PROJECTS.map(projectHeight), 300));
-const awardH = Math.ceil(Math.max(...AWARDS.map((a) => awardLayout(a).H)));
-const sides = ['left', 'right'];
-const order = ['interests', 'publications', 'projects', 'stack', 'education', 'awards'];
+function buildProfile() {
+  fs.mkdirSync(OUT, { recursive: true });
+  for (const f of fs.readdirSync(OUT)) if (f.endsWith('.svg')) fs.unlinkSync(path.join(OUT, f));
 
-for (const [theme, t] of Object.entries(THEMES)) {
-  write(`banner-${theme}.svg`, banner(t, theme));
-  for (const p of PILLS) write(`pill-${p.id}-${theme}.svg`, pill(p, t));
-  order.forEach((id, i) => write(`h-${id}-${theme}.svg`, heading(SECTIONS[id], i + 1, t)));
-  write(`interests-${theme}.svg`, chips(INTERESTS.map((label) => ({ label })), t, `Research interests: ${INTERESTS.join(', ')}`));
-  PUBLICATIONS.forEach((p, i) => write(`pub-${i + 1}-${theme}.svg`, pubRow(p, i, PUBLICATIONS.length, t)));
-  write(`pubs-more-${theme}.svg`, pubsMore(t));
-  PROJECTS.forEach((p, i) => write(`card-${p.id}-${theme}.svg`, projectCard(p, i, t, sides[i % 2], projectH)));
-  write(`card-metrics-${theme}.svg`, metricsCard(METRICS, t, sides[PROJECTS.length % 2], projectH));
-  write(`stack-${theme}.svg`, chips(STACK, t, `Tech stack: ${STACK.map((s) => s.label).join(', ')}`));
-  write(`education-${theme}.svg`, education(EDUCATION, t));
-  AWARDS.forEach((a, i) => write(`award-${a.id}-${theme}.svg`, awardCard(a, i, t, sides[i % 2], awardH)));
+  const projectH = Math.ceil(Math.max(...PROJECTS.map(projectHeight), 300));
+  const awardH = Math.ceil(Math.max(...AWARDS.map((a) => awardLayout(a).H)));
+  const sides = ['left', 'right'];
+  const order = ['interests', 'publications', 'projects', 'stack', 'education', 'awards'];
+
+  for (const [theme, t] of Object.entries(THEMES)) {
+    write(`banner-${theme}.svg`, banner(t, theme));
+    for (const p of PILLS) write(`pill-${p.id}-${theme}.svg`, pill(p, t));
+    order.forEach((id, i) => write(`h-${id}-${theme}.svg`, heading(SECTIONS[id], i + 1, t)));
+    write(`interests-${theme}.svg`, chips(INTERESTS.map((label) => ({ label })), t, `Research interests: ${INTERESTS.join(', ')}`));
+    PUBLICATIONS.forEach((p, i) => write(`pub-${i + 1}-${theme}.svg`, pubRow(p, i, PUBLICATIONS.length, t)));
+    write(`pubs-more-${theme}.svg`, pubsMore(t));
+    PROJECTS.forEach((p, i) => write(`card-${p.id}-${theme}.svg`, projectCard(p, i, t, sides[i % 2], projectH)));
+    write(`card-metrics-${theme}.svg`, metricsCard(METRICS, t, sides[PROJECTS.length % 2], projectH));
+    write(`stack-${theme}.svg`, chips(STACK, t, `Tech stack: ${STACK.map((s) => s.label).join(', ')}`));
+    write(`education-${theme}.svg`, education(EDUCATION, t));
+    AWARDS.forEach((a, i) => write(`award-${a.id}-${theme}.svg`, awardCard(a, i, t, sides[i % 2], awardH)));
+  }
+
+  fs.writeFileSync(README, readme());
+  console.log('README.md written');
 }
 
-fs.writeFileSync(README, readme());
-console.log('README.md written');
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) buildProfile();
